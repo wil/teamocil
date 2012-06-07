@@ -20,6 +20,8 @@ module Teamocil
       # @return [Array]
       def generate_commands # {{{
         commands = []
+        commands << "tmux set-option set-titles on"
+        commands << "tmux set-option set-titles-string \"#{@name}\"" unless @name.nil?
         commands << "tmux rename-session \"#{@name}\"" unless @name.nil?
         commands << @windows.map(&:generate_commands)
         commands << "tmux select-pane -t 0"
